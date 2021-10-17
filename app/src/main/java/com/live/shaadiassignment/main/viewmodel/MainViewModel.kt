@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.live.shaadiassignment.application.BaseApplication
 import com.live.shaadiassignment.main.repository.MainRepository
 import com.live.shaadiassignment.utilities.livedatawrapper.Event
 import com.live.shaadiassignment.main.models.ProfileModel
@@ -11,9 +12,11 @@ import com.live.shaadiassignment.main.models.ProfileResponseModel
 import com.live.shaadiassignment.room.ProfileEntity
 import com.live.shaadiassignment.room.ProfileMapper
 import com.live.shaadiassignment.room.RoomRepo
+import com.live.shaadiassignment.utilities.network.NetworkUtil
 import com.live.shaadiassignment.utilities.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 /**
@@ -39,16 +42,26 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
     }
 
     fun requestProfiles(results: Int) {
-        viewModelScope.launch {
-            _profileLiveData.postValue(Resource.loading(null))
-            mainRepository.getProfiles(results).let {
-                if (it!!.isSuccessful){
-                    it.body()?.let { profileResponseModel ->
-                        roomRepo.insertAllProfiles(profileMapper.mapRestProfile(profileResponseModel.profileList))
-                        _profileLiveData.postValue(Resource.success(null))
+        if (NetworkUtil.isNetworkAvailable(BaseApplication.getInstance()!!.applicationContext)) {
+            viewModelScope.launch {
+                _profileLiveData.postValue(Resource.loading(null))
+                try {
+                    mainRepository.getProfiles(results).let {
+                        if (it!!.isSuccessful) {
+                            it.body()?.let { profileResponseModel ->
+                                roomRepo.insertAllProfiles(
+                                    profileMapper.mapRestProfile(
+                                        profileResponseModel.profileList
+                                    )
+                                )
+                                _profileLiveData.postValue(Resource.success(null))
+                            }
+                        } else {
+                            _profileLiveData.postValue(Resource.error("Something Went Wrong", null))
+                        }
                     }
-                } else {
-                    _profileLiveData.postValue(Resource.error("Something Went Wrong", null))
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
