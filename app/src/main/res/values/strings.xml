@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ShaadiAssignment</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_not_now">Not Now</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="profile_list_empty">No Matches Found</string>
+    <string name="profile_title">Shaadi Matches</string>
+    <string name="item_profile_decline">Decline</string>
+    <string name="item_profile_accept">Accept</string>
+    <string name="profile_accepted">Member Accepted</string>
+    <string name="profile_declined">Member Declined</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base Application Theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <!-- PopUp Animation -->
+    <style name="PopUpAnimation">
+        <item name="android:windowEnterAnimation">@anim/fadein</item>
+        <item name="android:windowExitAnimation">@anim/fadeout</item>
+    </style>
+
+    <style name="PopUpAnimation2">
+        <item name="android:windowEnterAnimation">@anim/up_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/down_from_top</item>
+    </style>
+
+
+    <!-- Full Layout PopUp Animation -->
+    <style name="PopUpAnimationFullPage">
+        <item name="android:windowEnterAnimation">@anim/enter_from_right_shorter</item>
+        <item name="android:windowExitAnimation">@anim/exit_to_right_shorter</item>
+    </style>
+
+    <style name="PopUpAnimationFullPage2">
+        <item name="android:windowEnterAnimation">@anim/up_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/down_from_top</item>
+    </style>
+
+    <style name="PopUpAnimationFullPage3">
+        <item name="android:windowEnterAnimation">@anim/fadein</item>
+        <item name="android:windowExitAnimation">@anim/fadeout</item>
+    </style>
+
+</resources>
